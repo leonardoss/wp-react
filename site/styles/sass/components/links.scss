@@ -1,0 +1,28 @@
+.links{
+    margin: 30px 0 0 0;
+    .link{
+			text-align: right;
+      .project-card__link {
+        margin: 0;
+        text-decoration: underline;
+      }
+      .tip {
+				font-size: 12px;
+				color: #AAA;
+				display: block;
+				clear: both;
+      }
+  
+      @media screen and (min-width: 769px) {
+				.project-card__link {
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+      @media screen and (max-width: 990px) {
+        margin-bottom: 10px;
+        
+      }
+    }
+  }
