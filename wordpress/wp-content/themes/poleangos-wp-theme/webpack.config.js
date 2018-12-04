@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = (env, options) => {
@@ -46,10 +46,6 @@ module.exports = (env, options) => {
         },
       ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: './src/index.html',
-      }),
-    ],
+    plugins: [],
   };
 };

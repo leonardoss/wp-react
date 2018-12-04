@@ -1,7 +1,7 @@
 {
-  "name": "wp-react-theme",
+  "name": "poleangos-theme",
   "version": "1.0.0",
-  "description": "Wp theme built with react",
+  "description": "Poleangos: Wp theme built with react",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
