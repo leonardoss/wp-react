@@ -9,37 +9,11 @@ class Posts extends React.Component {
     super(props);
     this.state = {
       posts: [],
-      page: 0,
+      page: 1,
       getPosts: true,
       controller: false
     };
     this.getMorePosts = this.getMorePosts.bind(this);
-  }
-
-  componentWillUnmount() {
-    this.getMorePosts = null;
-  }
-
-  componentDidMount() {
-    var that = this;
-    window.onbeforeunload = function() {
-      window.scrollTo(0, 0);
-    };
-
-    // init ScrollMagic Controller
-    that.state.controller = new ScrollMagic.Controller();
-
-    // build scene
-    var scene = new ScrollMagic.Scene({
-      triggerElement: "#colophon",
-      triggerHook: "onEnter"
-    })
-      .addTo(that.state.controller)
-      .on("enter", function(e) {
-        if (that.state.getPosts && that.getMorePosts !== null) {
-          that.getMorePosts();
-        }
-      });
   }
 
   getMorePosts() {
@@ -79,20 +53,14 @@ class Posts extends React.Component {
       });
   }
 
-  componentDidUpdate() {
-    var FadeInController = new ScrollMagic.Controller();
-    document
-      .querySelectorAll(".posts-container .col-md-4.card-outer")
-      .forEach(function(item) {
-        // build a scene
-        var FadeInScene = new ScrollMagic.Scene({
-          triggerElement: item.children[0],
-          reverse: false,
-          triggerHook: 1
-        })
-          .setClassToggle(item, "fade-in")
-          .addTo(FadeInController);
-      });
+  componentWillUnmount() {
+    this.getMorePosts = null;
+  }
+
+  componentDidMount() {
+    if (this.state.getPosts && this.getMorePosts !== null) {
+      this.getMorePosts();
+    }
   }
 
   render() {
