@@ -3,23 +3,22 @@
 	 * @package Poleangos
 	 */
 
+    wp_enqueue_style( 'poleangos-style-dist', get_stylesheet_directory_uri() . '/dist/style.css');
+    wp_enqueue_style( 'poleangos-style', get_stylesheet_uri() );
+    wp_enqueue_script( 'scrollmagic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js' , array( 'jquery' ), '1.0', false );    
+    
     wp_enqueue_script( 'poleangos-script', get_stylesheet_directory_uri() . '/dist/app.js' , array(), '1.0', true );
 
     $url = trailingslashit( home_url() );
     $path = trailingslashit( parse_url( $url, PHP_URL_PATH ) );
 
-    wp_scripts()->add_data( 'poleangos-script', 'data', sprintf( 'var poleangosSettings = %s;', wp_json_encode( array(
+    wp_scripts()->add_data( 'poleangos-script', 'data', sprintf( 'var PoleangosSettings = %s;', wp_json_encode( array(
         'title' => get_bloginfo( 'name', 'display' ),
         'path' => $path,
         'URL' => array(
-            'api' => esc_url_raw( get_rest_url( null, '/wp/v2' ) ),
+            'api' => esc_url_raw( get_rest_url( null, '/wp/v2/' ) ),
             'root' => esc_url_raw( $url ),
-        ),
-        'woo' => array(
-            'url' => esc_url_raw( 'http://localhost/santopixel/wp-react/wordpress/wp-json/wc/v2' ),
-            'consumer_key' => 'ck_803bcdcaa73d3a406a0f107041b07ef6217e05b9',
-            'consumer_secret' => 'cs_c50ba3a77cc88c3bf46ebac49bbc96de3a543f03'
-        ),
+        )
     ))));
 
 

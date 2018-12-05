@@ -1,15 +1,17 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require('autoprefixer');
 
 module.exports = (env, options) => {
   const isDevMode = options.mode === 'development';
 
   return {
-    entry: ['@babel/polyfill', './src/index.js'],
+    entry: {
+      app: ['@babel/polyfill', './src/index.js'],
+    },
     output: {
       path: path.join(__dirname, '/dist'),
-      filename: 'index_bundle.js',
+      filename: 'app.js',
     },
     module: {
       rules: [
@@ -23,7 +25,8 @@ module.exports = (env, options) => {
         {
           test: /\.scss$/,
           use: [
-            'style-loader',
+            // devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -44,8 +47,24 @@ module.exports = (env, options) => {
             },
           ],
         },
+        {
+          test: /\.(jpe?g|png|gif|svg)$/i,
+          use: [
+            'file-loader?name=[name].[ext]&outputPath=images/&publicPath=http://localhost/santopixel/wp-react/wordpress/wp-content/themes/poleangos-wp-theme/dist/images',
+            'image-webpack-loader'
+          ]
+        },
       ],
     },
-    plugins: [],
+    resolve: {
+      extensions: ['.js']
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: "style.css",
+        allChunks: true,
+        // chunkFilename: "[id].css"
+      })
+    ],
   };
 };
