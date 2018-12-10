@@ -5,11 +5,7 @@
 
 	get_header();
 ?>
-
-	<div id="app">
-		<p>the loop</p>
-	</div>
-
+	<div id="app"></div>
 <?php	
 	get_footer();
 ?>
